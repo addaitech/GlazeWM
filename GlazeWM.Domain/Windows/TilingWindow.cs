@@ -34,5 +34,20 @@ namespace GlazeWM.Domain.Windows
     {
       SizePercentage = sizePercentage;
     }
+    public void EnterBSPMode()
+{
+    // Create a BSP tree for the window.
+    bsp.BSPTree tree = new bsp.BSPTree(this.Position, this.Size);
+
+    // Add the window to the BSP tree.
+    tree.AddWindow(this.Handle);
+
+    // Calculate the BSP layout for the window.
+    bsp.BSPLayout layout = tree.CalculateLayout();
+
+    // Set the window's position and size to the BSP layout.
+    this.Position = layout.Position;
+    this.Size = layout.Size;
+}
   }
 }
